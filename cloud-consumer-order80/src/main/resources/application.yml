@@ -1,0 +1,20 @@
+server:
+  port: 80 #模拟用户下单 不关心端口号80也默认
+
+spring:
+  application:
+    name: cloud-order-service  #不加下面：instance-id: order80，该行name值会在Eureka注册中心页面显示
+
+eureka:
+  client:
+    #表示是否将自己注册进EurekaServer默认为true。
+    register-with-eureka: true #只要加false 就会在热部署下 不会在进行注册
+    #是否从EurekaServer抓取已有的注册信息，默认为true。单节点无所谓，集群必须设置为true才能配合ribbon使用负载均衡
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://localhost:7001/eureka #单机版
+#      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka  # 集群版
+
+  instance:
+    instance-id: order80
+    prefer-ip-address: true     #端口80，访问路径可以显示IP地址
